@@ -9,7 +9,7 @@ import { baseOptions } from '#/libraries/fuma.layout'
 import { source } from '#/libraries/fuma.source'
 
 export const Route = createFileRoute('/docs/$')({
-  component: Page,
+  component: RouteComponent,
   loader: async ({ params }) => {
     const slugs = params._splat?.split('/') ?? []
     const data = await serverLoader({ data: slugs })
@@ -45,7 +45,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
   },
 })
 
-function Page() {
+function RouteComponent() {
   const data = Route.useLoaderData()
   const { pageTree } = useFumadocsLoader(data)
   const Content = clientLoader.getComponent(data.path)
